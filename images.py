@@ -99,11 +99,6 @@ def main():
     print("=" * 50)
     
     # Verify directories exist
-    if not os.path.exists(OBSIDIAN_POSTS_DIR):
-        print(f"Error: Obsidian posts directory not found: {OBSIDIAN_POSTS_DIR}")
-        print("Please update the OBSIDIAN_POSTS_DIR path in this script.")
-        return
-    
     if not os.path.exists(OBSIDIAN_ATTACHMENTS_DIR):
         print(f"Error: Obsidian attachments directory not found: {OBSIDIAN_ATTACHMENTS_DIR}")
         print("Please update the OBSIDIAN_ATTACHMENTS_DIR path in this script.")
