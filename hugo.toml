@@ -1,0 +1,28 @@
+baseURL = 'https://albert-tuan.github.io/'
+languageCode = 'vi'
+title = 'SecOps & Reversing Blog'
+theme = 'PaperMod'
+
+[pagination]
+  pagerSize = 5   # Số bài viết hiển thị trên 1 trang
+
+[params]
+  env = 'production'
+  title = 'Malware noob'
+  author = 'Albert Tuan'
+  
+  # Hiển thị nút copy code trong các bài viết kỹ thuật
+  [params.codeHighlight]
+    copyButton = true
+
+  # Hiển thị mục lục (Table of Contents) tự động cho bài viết
+  [params.ShowToc]
+    TocOpen = true   # Mặc định mở mục lục khi đọc bài
+
+  # Hiển thị thời gian đọc ước tính và số lượng từ
+  ShowReadingTime = true
+  ShowWordCount = true
+
+  # Cho phép người đọc chuyển đổi chế độ Sáng / Tối (Dark/Light mode)
+  defaultTheme = "auto"
+  disableThemeToggle = false
