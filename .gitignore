@@ -1,0 +1,23 @@
+# Hugo public folder - generated on build
+public/
+
+# Hugo resource folder (if using asset bundling)
+# resources/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.bak
+
+# Environment files (if any)
+.env
+.env.local

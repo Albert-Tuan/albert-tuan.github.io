@@ -1,28 +1,49 @@
-baseURL = 'https://albert-tuan.github.io/'
-languageCode = 'vi'
-title = 'SecOps & Reversing Blog'
-theme = 'PaperMod'
+baseURL = "/"
+languageCode = "en-us"
+theme = "terminal"
+title = "Albert Tuan's Blog"
+paginate = 5
 
-[pagination]
-  pagerSize = 5   # Số bài viết hiển thị trên 1 trang
+[markup.highlight]
+  noClasses = false
 
 [params]
-  env = 'production'
-  title = 'Malware noob'
-  author = 'Albert Tuan'
-  
-  # Hiển thị nút copy code trong các bài viết kỹ thuật
-  [params.codeHighlight]
-    copyButton = true
+  contentTypeName = "posts"
+  showMenuItems = 2
+  showLanguageSelector = false
+  fullWidthTheme = false
+  centerTheme = false
+  autoCover = true
+  showLastUpdated = false
 
-  # Hiển thị mục lục (Table of Contents) tự động cho bài viết
-  [params.ShowToc]
-    TocOpen = true   # Mặc định mở mục lục khi đọc bài
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Albert Tuan's Blog"
 
-  # Hiển thị thời gian đọc ước tính và số lượng từ
-  ShowReadingTime = true
-  ShowWordCount = true
+    [languages.en.params]
+      subtitle = "SecOps & Reversing Blog"
+      owner = "Albert Tuan"
+      keywords = "security, reversing, malware analysis"
+      copyright = ""
+      menuMore = "Show more"
+      readMore = "Read more"
+      readOtherPosts = "Read other posts"
+      newerPosts = "Newer posts"
+      olderPosts = "Older posts"
+      missingContentMessage = "Page not found..."
+      missingBackButtonLabel = "Back to home page"
+      minuteReadingTime = "min read"
+      words = "words"
 
-  # Cho phép người đọc chuyển đổi chế độ Sáng / Tối (Dark/Light mode)
-  defaultTheme = "auto"
-  disableThemeToggle = false
+      [languages.en.params.logo]
+        logoText = "Albert's Blog"
+        logoHomeLink = "/"
+
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about"
+
+[module]
+  replacements = "github.com/panr/hugo-theme-terminal/v4 -> themes/terminal"

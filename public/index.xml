@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Blog Cá Nhân</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Blog Cá Nhân</description>
-    <generator>Hugo</generator>
-    <language>vi</language>
-    <lastBuildDate>Fri, 02 Oct 2026 11:18:20 +0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hello World</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
-      <pubDate>Fri, 02 Oct 2026 11:18:20 +0700</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
-      <description></description>
-    </item>
-  </channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Albert Tuan&#39;s Blog</title>
+		<link>//localhost:1313/</link>
+		<description>Recent content on Albert Tuan&#39;s Blog</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 02 Oct 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Hello World</title>
+				<link>//localhost:1313/posts/hello-world/</link>
+				<pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/posts/hello-world/</guid>
+				<description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World&lt;/h1&gt;&#xA;&lt;p&gt;Welcome to my blog! This is my first post created with the Obsidian → Hugo pipeline.&lt;/p&gt;&#xA;&lt;h2 id=&#34;about-this-blog&#34;&gt;About This Blog&lt;/h2&gt;&#xA;&lt;p&gt;This blog is built using:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Obsidian&lt;/strong&gt; - For writing markdown posts&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Hugo&lt;/strong&gt; - Static site generator&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt; - Version control and hosting&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;the-pipeline&#34;&gt;The Pipeline&lt;/h2&gt;&#xA;&lt;p&gt;The workflow is simple:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Write a post in Obsidian&lt;/li&gt;&#xA;&lt;li&gt;Run &lt;code&gt;./update-blog.sh&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Your blog is live!&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Stay tuned for more content.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>
