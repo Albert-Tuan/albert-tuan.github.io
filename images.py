@@ -24,8 +24,8 @@ from pathlib import Path
 # Path to your Obsidian posts folder (where you write your blogs)
 OBSIDIAN_POSTS_DIR = "/path/to/your/Obsidian/vault/posts"
 
-# Path to your Obsidian attachments folder (where Obsidian stores images)
-OBSIDIAN_ATTACHMENTS_DIR = "/path/to/your/Obsidian/vault/attachments"
+# Path to your Obsidian vault attachments folder (where Obsidian stores images)
+OBSIDIAN_ATTACHMENTS_DIR = "/home/thaus/GoogleDrive/Obsidian/attachments"
 
 # Path to your Hugo static/images folder
 HUGO_STATIC_IMAGES_DIR = "/home/thaus/Documents/my-blog/static/images"

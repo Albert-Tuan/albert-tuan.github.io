@@ -1,33 +1,30 @@
 #!/bin/bash
 #
 # ============================================================
-# MEGA SCRIPT: Obsidian → Hugo → GitHub Blog Pipeline
+# MEGA SCRIPT: Obsidian → Hugo → GitHub Pages
 # ============================================================
 #
 # This script automates the entire blogging workflow:
 # 1. Sync posts from Obsidian vault to Hugo content folder
 # 2. Sync images from Obsidian attachments to Hugo static/images
 # 3. Build the Hugo site
-# 4. Commit and push to GitHub (master branch)
-# 5. Push to hosting branch (gh-pages or hoster)
+# 4. Commit and push to GitHub Pages (main branch)
 #
+# Repository: https://github.com/Albert-Tuan/albert-tuan.github.io
 # ============================================================
 
 # ============================================
-# CONFIGURATION - Edit these paths as needed
+# CONFIGURATION
 # ============================================
 
 # Path to your Obsidian vault posts folder
-OBSIDIAN_POSTS_DIR="/path/to/your/Obsidian/vault/posts"
+OBSIDIAN_POSTS_DIR="/home/thaus/GoogleDrive/Obsidian/posts"
 
 # Path to your Obsidian vault attachments folder
-OBSIDIAN_ATTACHMENTS_DIR="/path/to/your/Obsidian/vault/attachments"
+OBSIDIAN_ATTACHMENTS_DIR="/home/thaus/GoogleDrive/Obsidian/attachments"
 
-# Git repository URL (SSH format recommended)
-GIT_REPO="git@github.com:YOUR_USERNAME/YOUR_REPO.git"
-
-# GitHub username
-GIT_USERNAME="YOUR_USERNAME"
+# Hugo blog directory (where this script lives)
+HUGO_DIR="/home/thaus/Documents/my-blog"
 
 # Commit message (optional, defaults to auto-generated)
 COMMIT_MESSAGE=""
@@ -46,16 +43,17 @@ NC='\033[0m' # No Color
 # ============================================
 echo ""
 echo -e "${BLUE}============================================${NC}"
-echo -e "${BLUE}  OBSIDIAN → HUGO BLOG PIPELINE${NC}"
+echo -e "${BLUE}  OBSIDIAN → HUGO → GITHUB PAGES${NC}"
 echo -e "${BLUE}============================================${NC}"
 echo ""
+
+# Change to Hugo directory
+cd "$HUGO_DIR" || exit 1
 
 # Check if we're in the Hugo directory
 if [ ! -f "hugo.toml" ] && [ ! -f "config.toml" ]; then
     echo -e "${RED}Error: This script must be run from your Hugo blog directory.${NC}"
-    echo "Current directory: $(pwd)"
-    echo ""
-    echo "Please navigate to your Hugo blog directory and run this script again."
+    echo "Expected: $HUGO_DIR"
     exit 1
 fi
 
@@ -66,7 +64,7 @@ echo -e "${YELLOW}Step 1: Syncing posts from Obsidian...${NC}"
 
 if [ ! -d "$OBSIDIAN_POSTS_DIR" ]; then
     echo -e "${RED}Error: Obsidian posts directory not found: $OBSIDIAN_POSTS_DIR${NC}"
-    echo "Please update the OBSIDIAN_POSTS_DIR path in this script."
+    echo "Please create the folder or update the path in this script."
     exit 1
 fi
 
@@ -85,7 +83,7 @@ echo -e "${YELLOW}Step 2: Syncing images from Obsidian...${NC}"
 
 if [ ! -d "$OBSIDIAN_ATTACHMENTS_DIR" ]; then
     echo -e "${RED}Error: Obsidian attachments directory not found: $OBSIDIAN_ATTACHMENTS_DIR${NC}"
-    echo "Please update the OBSIDIAN_ATTACHMENTS_DIR path in this script."
+    echo "Please create the folder or update the path in this script."
     exit 1
 fi
 
@@ -101,7 +99,7 @@ echo ""
 # STEP 3: Build Hugo site
 # ============================================
 echo -e "${YELLOW}Step 3: Building Hugo site...${NC}"
-hugo
+hugo --minify
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✓ Hugo site built successfully!${NC}"
 else
@@ -126,32 +124,18 @@ echo -e "${GREEN}✓ Changes committed!${NC}"
 echo ""
 
 # ============================================
-# STEP 5: Push to GitHub master/main branch
+# STEP 5: Push to GitHub Pages (main branch)
 # ============================================
-echo -e "${YELLOW}Step 5: Pushing to GitHub (main branch)...${NC}"
+echo -e "${YELLOW}Step 5: Pushing to GitHub Pages...${NC}"
 git push origin main
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ Pushed to GitHub main branch!${NC}"
+    echo -e "${GREEN}✓ Pushed to GitHub Pages!${NC}"
+    echo ""
+    echo -e "${BLUE}Your blog will be live at:${NC}"
+    echo -e "${GREEN}https://albert-tuan.github.io/${NC}"
 else
     echo -e "${RED}✗ Failed to push to GitHub!${NC}"
     exit 1
-fi
-echo ""
-
-# ============================================
-# STEP 6: Push public folder to hosting branch
-# ============================================
-echo -e "${YELLOW}Step 6: Deploying to hosting branch...${NC}"
-
-# Using subtree push to deploy only the public folder
-git subtree push --prefix public origin gh-pages
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ Deployed to hosting branch (gh-pages)!${NC}"
-else
-    echo -e "${YELLOW}Note: gh-pages branch deployment failed.${NC}"
-    echo "This is normal if this is your first push."
-    echo "You may need to initialize the gh-pages branch manually:"
-    echo "  git push origin \$(git subtree split --prefix public main):gh-pages --force"
 fi
 echo ""
 
