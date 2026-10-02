@@ -21,9 +21,6 @@ from pathlib import Path
 # CONFIGURATION - Edit these paths as needed
 # ============================================
 
-# Path to your Obsidian posts folder (where you write your blogs)
-OBSIDIAN_POSTS_DIR = "/path/to/your/Obsidian/vault/posts"
-
 # Path to your Obsidian vault attachments folder (where Obsidian stores images)
 OBSIDIAN_ATTACHMENTS_DIR = "/home/thaus/GoogleDrive/Obsidian/attachments"
 
