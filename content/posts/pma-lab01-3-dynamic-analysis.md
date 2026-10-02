@@ -36,9 +36,9 @@ Trước khi chạy malware, chụp "ảnh" trạng thái hệ thống:
 
 Chạy malware và quan sát:
 
-![Lab01-3 1](Pasted image 20260918205122.png)
-![Lab01-3 2](Pasted image 20260918205222.png)
-![Lab01-3 3](Pasted image 20260918205305.png)
+![Lab01-3 1](/images/Pasted_image_20260918205122.png)
+![Lab01-3 2](/images/Pasted_image_20260918205222.png)
+![Lab01-3 3](/images/Pasted_image_20260918205305.png)
 
 Các hành vi cần chú ý:
 - File nào được tạo/sửa/xóa
@@ -48,10 +48,10 @@ Các hành vi cần chú ý:
 
 ### 4. Phân tích Process
 
-![Lab01-3 4](Pasted image 20260918214036.png)
-![Lab01-3 5](Pasted image 20260918214016.png)
-![Lab01-3 6](Pasted image 20260918210327.png)
-![Lab01-3 7](Pasted image 20260918210340.png)
+![Lab01-3 4](/images/Pasted_image_20260918214036.png)
+![Lab01-3 5](/images/Pasted_image_20260918214016.png)
+![Lab01-3 6](/images/Pasted_image_20260918210327.png)
+![Lab01-3 7](/images/Pasted_image_20260918210340.png)
 
 Quan sát trong Process Explorer:
 - Parent-child relationship
@@ -61,9 +61,9 @@ Quan sát trong Process Explorer:
 
 ### 5. Phân tích File System
 
-![Lab01-3 8](Pasted image 20260918210816.png)
-![Lab01-3 9](Pasted image 20260918211024.png)
-![Lab01-3 10](Pasted image 20260918211419.png)
+![Lab01-3 8](/images/Pasted_image_20260918210816.png)
+![Lab01-3 9](/images/Pasted_image_20260918211024.png)
+![Lab01-3 10](/images/Pasted_image_20260918211419.png)
 
 Quan sát trong Process Monitor:
 - File create/write/delete
@@ -72,9 +72,9 @@ Quan sát trong Process Monitor:
 
 ### 7. Phân tích Registry
 
-![Lab01-3 11](Pasted image 20260918211732.png)
-![Lab01-3 12](Pasted image 20260918211834.png)
-![Lab01-3 13](Pasted image 20260918211847.png)
+![Lab01-3 11](/images/Pasted_image_20260918211732.png)
+![Lab01-3 12](/images/Pasted_image_20260918211834.png)
+![Lab01-3 13](/images/Pasted_image_20260918211847.png)
 
 Các vị trí registry cần chú ý:
 - `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`
@@ -83,8 +83,8 @@ Các vị trí registry cần chú ý:
 
 ### 8. Phân tích Network
 
-![Lab01-3 14](Pasted image 20260918212252.png)
-![Lab01-3 15](Pasted image 20260918212336.png)
+![Lab01-3 14](/images/Pasted_image_20260918212252.png)
+![Lab01-3 15](/images/Pasted_image_20260918212336.png)
 
 Quan sát trong Wireshark:
 - DNS queries
@@ -94,9 +94,9 @@ Quan sát trong Wireshark:
 
 ### 9. Post-analysis
 
-![Lab01-3 16](Pasted image 20260918213134.png)
-![Lab01-3 17](Pasted image 20260918213218.png)
-![Lab01-3 18](Pasted image 20260918213237.png)
+![Lab01-3 16](/images/Pasted_image_20260918213134.png)
+![Lab01-3 17](/images/Pasted_image_20260918213218.png)
+![Lab01-3 18](/images/Pasted_image_20260918213237.png)
 
 Sau khi malware chạy:
 - Chụp registry snapshot mới

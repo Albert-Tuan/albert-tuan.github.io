@@ -12,24 +12,24 @@ Trong bài lab này, chúng ta sẽ phân tích `Lab01-02.exe` - một malware s
 ## 1. Kiểm tra ban đầu
 
 Kiểm tra định dạng file `Lab01-02.exe`:
-![File Info](Pasted image 20260916221225.png)
+![File Info](/images/Pasted_image_20260916221225.png)
 
 - **PE 32-bit**
 - **Được nén bằng UPX**
 
 ## 2. Tính hash và kiểm tra VirusTotal
 
-![Hash](Pasted image 20260916221501.png)
+![Hash](/images/Pasted_image_20260916221501.png)
 
 Kiểm tra trên VirusTotal:
-![VT Result](Pasted image 20260916221631.png)
-![VT Detection](Pasted image 20260916222111.png)
+![VT Result](/images/Pasted_image_20260916221631.png)
+![VT Detection](/images/Pasted_image_20260916222111.png)
 
 56/69 test phát hiện → Rất có khả năng là mã độc.
 
 ## 3. Phân tích PE Header
 
-![PE Header](Pasted image 20260916222211.png)
+![PE Header](/images/Pasted_image_20260916222211.png)
 
 Cấu trúc PE có các section đã được mã hóa thành `UPX0`, `UPX1`, `UPX2`:
 
@@ -44,19 +44,19 @@ Cấu trúc PE có các section đã được mã hóa thành `UPX0`, `UPX1`, `U
 
 ## 4. Unpack với UPX
 
-![UPX Unpack](Pasted image 20260916224030.png)
+![UPX Unpack](/images/Pasted_image_20260916224030.png)
 
 Sau khi unpack, kiểm tra lại với PEiD:
-![PEiD After](Pasted image 20260916224111.png)
+![PEiD After](/images/Pasted_image_20260916224111.png)
 
 - Compiler: **Microsoft Visual C++ 6.0**
-![Section After](Pasted image 20260916224212.png)
+![Section After](/images/Pasted_image_20260916224212.png)
 
 Các section đã chuẩn (V.size < R.size).
 
 ## 5. Phân tích Strings
 
-![Strings](Pasted image 20260916224641.png)
+![Strings](/images/Pasted_image_20260916224641.png)
 
 Các điểm nghi vấn:
 - URL: `http://www.malwareanalysisbook.com`
@@ -66,13 +66,13 @@ Các điểm nghi vấn:
 
 ## 6. Phân tích Dependencies
 
-![Imports](Pasted image 20260918160537.png)
+![Imports](/images/Pasted_image_20260918160537.png)
 
 4 thư viện chính:
 
 ### Kernel32.dll
 
-![Kernel32](Pasted image 20260918160720.png)
+![Kernel32](/images/Pasted_image_20260918160720.png)
 
 **Các hàm chính:**
 
@@ -106,7 +106,7 @@ Các điểm nghi vấn:
 
 ### ADVAPI32.dll
 
-![AdvAPI32](Pasted image 20260918164728.png)
+![AdvAPI32](/images/Pasted_image_20260918164728.png)
 
 - `OpenSCManagerA` - Kết nối tới Service Control Manager
 - `CreateServiceA` - Tạo Windows Service mới
@@ -115,12 +115,12 @@ Các điểm nghi vấn:
 → Chương trình có khả năng liên quan đến **Windows Service**, có thể tự đăng ký làm service.
 
 ### MSVCRT.dll
-![MSVCRT](Pasted image 20260918165608.png)
+![MSVCRT](/images/Pasted_image_20260918165608.png)
 
 Thư viện chuẩn của MSVC, chưa có gì đặc biệt.
 
 ### WININET.dll
-![WinINet](Pasted image 20260918165838.png)
+![WinINet](/images/Pasted_image_20260918165838.png)
 
 - `InternetOpenA` - Khởi tạo WinINet session
 - `InternetOpenUrlA` - Mở tài nguyên qua HTTP/HTTPS/FTP
@@ -138,7 +138,7 @@ Thư viện chuẩn của MSVC, chưa có gì đặc biệt.
 
 ## 7. Disassembly với PE Explorer
 
-![PE Explorer](Pasted image 20260918173946.png)
+![PE Explorer](/images/Pasted_image_20260918173946.png)
 
 Xác nhận các chuỗi có liên quan đến hành vi giả thuyết.
 
@@ -146,7 +146,7 @@ Xác nhận các chuỗi có liên quan đến hành vi giả thuyết.
 
 ### Main function
 
-![IDA Main](Pasted image 20260918180024.png)
+![IDA Main](/images/Pasted_image_20260918180024.png)
 
 Dịch sang pseudo-code:
 
@@ -173,7 +173,7 @@ int main()
 
 ### ServiceMain function
 
-![ServiceMain](Pasted image 20260918180541.png)
+![ServiceMain](/images/Pasted_image_20260918180541.png)
 
 ```assembly
 push offset Name        ; "HGL345"
@@ -202,7 +202,7 @@ CreateMutexA(NULL, FALSE, "HGL345");  // Tạo mutex mới
 
 ### Service Installation
 
-![Service Install](Pasted image 20260918181318.png)
+![Service Install](/images/Pasted_image_20260918181318.png)
 
 ```assembly
 push 3
@@ -257,7 +257,7 @@ CreateServiceA(
 
 ### Timer Setup
 
-![Timer](Pasted image 20260918182527.png)
+![Timer](/images/Pasted_image_20260918182527.png)
 
 ```assembly
 xor edx, edx

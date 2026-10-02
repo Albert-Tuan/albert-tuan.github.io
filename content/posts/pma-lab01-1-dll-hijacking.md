@@ -21,29 +21,29 @@ Cả 2 file đều được biên dịch bằng **Microsoft Visual C\C++ 6.0** v
 
 Đầu tiên, ta tính mã hash của cả 2 file để đảm bảo tính toàn vẹn:
 
-![Hash](Pasted_image_20260916144354.png)
+![Hash](/images/Pasted_image_20260916144354.png)
 
 Kiểm tra trên VirusTotal:
 
 **Lab01-1.exe:**
 - 53/69 trình test cảnh báo → Rất có thể là mã độc
-![VT Exe](Pasted_image_20260916152255.png)
+![VT Exe](/images/Pasted_image_20260916152255.png)
 
 **Lab01-1.dll:**
 - 38/69 trình test phát hiện, hầu hết báo là trojan
-![VT DLL](Pasted_image_20260916152703.png)
+![VT DLL](/images/Pasted_image_20260916152703.png)
 
 ## 3. Kiểm tra định dạng PE
 
 Cả 2 file đều là **PE 32-bit**, kiến trúc x86:
-![PE Info](Pasted_image_20260916144033.png)
+![PE Info](/images/Pasted_image_20260916144033.png)
 
 ## 4. Phân tích Strings
 
 **Strings của Lab01-1.exe:**
-![Strings Exe](Pasted_image_20260916171427.png)
-![Strings Exe 2](Pasted_image_20260916171510.png)
-![Strings Exe 3](Pasted_image_20260916171527.png)
+![Strings Exe](/images/Pasted_image_20260916171427.png)
+![Strings Exe 2](/images/Pasted_image_20260916171510.png)
+![Strings Exe 3](/images/Pasted_image_20260916171527.png)
 
 Phát hiện khả nghi:
 - Đường dẫn `C:\windows\system32\kernel32.dll`
@@ -54,8 +54,8 @@ Phát hiện khả nghi:
 → Chương trình cố tình nhái `kernel32.dll` bằng cách thay ký tự `l` bằng số `1`!
 
 **Strings của Lab01-1.dll:**
-![Strings DLL](Pasted_image_20260916171630.png)
-![Strings DLL 2](Pasted_image_20260916181620.png)
+![Strings DLL](/images/Pasted_image_20260916171630.png)
+![Strings DLL 2](/images/Pasted_image_20260916181620.png)
 
 Các chuỗi đáng chú ý:
 - Địa chỉ IP lạ: `127.26.152.13`
@@ -66,10 +66,10 @@ Các chuỗi đáng chú ý:
 ## 5. Phân tích với PEiD
 
 **Lab01-1.exe:**
-![PEiD](Pasted_image_20260916081506.png)
+![PEiD](/images/Pasted_image_20260916081506.png)
 
 - Compiler: **Microsoft Visual C++ 6.0**
-![Section Viewer](Pasted_image_20260916081517.png)
+![Section Viewer](/images/Pasted_image_20260916081517.png)
 
 Section sizes:
 - `.text`: 0x970 < 0x1000
@@ -81,38 +81,38 @@ Section sizes:
 ## 6. Phân tích Dependencies
 
 ### Lab01-1.exe
-![Dependencies](Pasted_image_20260916150916.png)
+![Dependencies](/images/Pasted_image_20260916150916.png)
 
 File phụ thuộc vào 2 thư viện chính:
 
 #### KERNEL32.dll
-![Kernel32](Pasted_image_20260916155557.png)
+![Kernel32](/images/Pasted_image_20260916155557.png)
 
 Các hàm được sử dụng:
-![Kernel32 Functions](Pasted_image_20260916160744.png)
+![Kernel32 Functions](/images/Pasted_image_20260916160744.png)
 
 **Phân tích nhóm hàm:**
 
 1. **Duyệt thư mục:**
     - `FindFirstFileA | FindNextFileA | FindClose` - Quét file trong thư mục
-    ![FindFile](Pasted_image_20260916161545.png)
+    ![FindFile](/images/Pasted_image_20260916161545.png)
 
 2. **Copy file:**
     - `CopyFile` - Copy file đến vị trí khác
-    ![CopyFile](Pasted_image_20260916162159.png)
+    ![CopyFile](/images/Pasted_image_20260916162159.png)
 
 3. **Tạo/Mở file:**
     - `CreateFileA / CloseHandle` - Mở hoặc tạo file trên ổ đĩa
 
 4. **Ánh xạ bộ nhớ:**
     - `CreateFileMappingA / MapViewOfFile / UnmapViewOfFile` - Ánh xạ file vào RAM để đọc/sửa
-    ![MapView](Pasted_image_20260916163410.png)
-    ![MapView 2](Pasted_image_20260916163325.png)
-    ![MapView 3](Pasted_image_20260916163337.png)
+    ![MapView](/images/Pasted_image_20260916163410.png)
+    ![MapView 2](/images/Pasted_image_20260916163325.png)
+    ![MapView 3](/images/Pasted_image_20260916163337.png)
 
 5. **Kiểm tra vùng nhớ:**
     - `IsBadReadPtr` - Kiểm tra quyền đọc vùng nhớ (tránh crash)
-    ![IsBadReadPtr](Pasted_image_20260916163643.png)
+    ![IsBadReadPtr](/images/Pasted_image_20260916163643.png)
 
 **Dự đoán hành vi:** Chương trình duyệt thư mục để tìm một file cụ thể → copy file đó đến vị trí khác → mở/tạo file trên ổ đĩa → ánh xạ vào RAM để chỉnh sửa trực tiếp.
 
@@ -124,12 +124,12 @@ Kết hợp với strings:
 → **Dự đoán:** Chương trình copy `kerne132.dll` đến `C:\windows\system32\`. Khi một chương trình khác vô tình gõ nhầm tên, sẽ load thư viện chứa mã độc này.
 
 #### MSVCRT.dll
-![MSVCRT](Pasted_image_20260916160500.png)
+![MSVCRT](/images/Pasted_image_20260916160500.png)
 
 Đây là thư viện chuẩn của Microsoft Visual C++ 6.0 - Không có gì khả nghi.
 
 ### Lab01-1.dll
-![DLL Dependencies](Pasted_image_20260916175935.png)
+![DLL Dependencies](/images/Pasted_image_20260916175935.png)
 
 3 thư viện chính:
 - KERNEL32.DLL
@@ -137,12 +137,12 @@ Kết hợp với strings:
 - **WS2_32.DLL** ← Đáng chú ý nhất
 
 #### WS2_32.DLL
-![WS2_32](Pasted_image_20260916180457.png)
+![WS2_32](/images/Pasted_image_20260916180457.png)
 
 Đây là thư viện giúp chương trình Windows truyền/nhận dữ liệu qua mạng Internet/LAN.
 
-![Network Functions](Pasted_image_20260916181212.png)
-![WSA Functions](Pasted_image_20260916182829.png)
+![Network Functions](/images/Pasted_image_20260916181212.png)
+![WSA Functions](/images/Pasted_image_20260916182829.png)
 
 Các hàm gọi đến server:
 - `connect()`, `send()`, `recv()`, `bind()`, `listen()`, `accept()`
@@ -174,19 +174,19 @@ Chương trình là **server**:
 
 Tiến hành trên FlareVM với snapshot sạch:
 
-![Snapshot](Pasted_image_20260916191812.png)
+![Snapshot](/images/Pasted_image_20260916191812.png)
 
 Đảm bảo không có kết nối mạng ra ngoài:
-![Network](Pasted_image_20260916191943.png)
+![Network](/images/Pasted_image_20260916191943.png)
 
-![Dynamic 1](Pasted_image_20260916193316.png)
-![Dynamic 2](Pasted_image_20260916193441.png)
-![Dynamic 3](Pasted_image_20260916193149.png)
-![Dynamic 4](Pasted_image_20260916193817.png)
-![Dynamic 5](Pasted_image_20260916193912.png)
-![Dynamic 6](Pasted_image_20260916200510.png)
-![Dynamic 7](Pasted_image_20260916200638.png)
-![Dynamic 8](Pasted_image_20260916201805.png)
+![Dynamic 1](/images/Pasted_image_20260916193316.png)
+![Dynamic 2](/images/Pasted_image_20260916193441.png)
+![Dynamic 3](/images/Pasted_image_20260916193149.png)
+![Dynamic 4](/images/Pasted_image_20260916193817.png)
+![Dynamic 5](/images/Pasted_image_20260916193912.png)
+![Dynamic 6](/images/Pasted_image_20260916200510.png)
+![Dynamic 7](/images/Pasted_image_20260916200638.png)
+![Dynamic 8](/images/Pasted_image_20260916201805.png)
 
 ## Kết luận
 

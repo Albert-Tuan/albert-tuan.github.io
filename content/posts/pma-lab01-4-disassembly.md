@@ -31,7 +31,7 @@ Bài lab cuối cùng trong series Lab01 tập trung vào **disassembly** và ph
 
 Mở file trong IDA Pro, chờ IDA phân tích xong:
 
-![Lab01-4 1](Pasted image 20260918213427.png)
+![Lab01-4 1](/images/Pasted_image_20260918213427.png)
 
 Các bước chính:
 1. **Load file** - IDA tự động phân tích PE header
@@ -41,7 +41,7 @@ Các bước chính:
 
 ### 2. Phân tích Entry Point
 
-![Lab01-4 2](Pasted image 20260918213455.png)
+![Lab01-4 2](/images/Pasted_image_20260918213455.png)
 
 Tại entry point, xác định:
 - Đây là DLL hay EXE?
@@ -50,7 +50,7 @@ Tại entry point, xác định:
 
 ### 3. Phân tích Imports
 
-![Lab01-4 3](Pasted image 20260918213509.png)
+![Lab01-4 3](/images/Pasted_image_20260918213509.png)
 
 Kiểm tra:
 - Imports nào đáng ngờ?
@@ -59,9 +59,9 @@ Kiểm tra:
 
 ### 4. Phân tích Strings
 
-![Lab01-4 4](Pasted image 20260918214128.png)
+![Lab01-4 4](/images/Pasted_image_20260918214128.png)
 
-![Lab01-4 5](Pasted image 20260918214223.png)
+![Lab01-4 5](/images/Pasted_image_20260918214223.png)
 
 Strings có thể bị obfuscated → cần tìm:
 - XOR key
@@ -70,7 +70,7 @@ Strings có thể bị obfuscated → cần tìm:
 
 ### 6. Phân tích Cross-references
 
-![Lab01-4 6](Pasted image 20260918214234.png)
+![Lab01-4 6](/images/Pasted_image_20260918214234.png)
 
 Sử dụng **Xrefs** để theo dõi:
 - Hàm nào gọi API nhạy cảm
@@ -79,8 +79,8 @@ Sử dụng **Xrefs** để theo dõi:
 
 ### 7. Phân tích Functions chính
 
-![Lab01-4 7](Pasted image 20260918213901.png)
-![Lab01-4 8](Pasted image 20260918213909.png)
+![Lab01-4 7](/images/Pasted_image_20260918213901.png)
+![Lab01-4 8](/images/Pasted_image_20260918213909.png)
 
 Phân tích từng function:
 1. Đọc disassembly
@@ -90,7 +90,7 @@ Phân tích từng function:
 
 ### 8. Phát hiện kỹ thuật nâng cao
 
-![Lab01-4 9](Pasted image 20260918214255.png)
+![Lab01-4 9](/images/Pasted_image_20260918214255.png)
 
 Các kỹ thuật cần tìm:
 
@@ -109,7 +109,7 @@ Các kỹ thuật cần tìm:
 
 ### 10. Tổng kết hành vi
 
-![Lab01-4 10](Pasted image 20260918214342.png)
+![Lab01-4 10](/images/Pasted_image_20260918214342.png)
 
 Sau khi phân tích xong, tổng kết:
 - Entry point → Unpacking → Anti-debug → Main logic → Payload → Cleanup
